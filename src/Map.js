@@ -1,15 +1,19 @@
 import React, {useState} from 'react';
 import L from 'leaflet';
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Tooltip, useMapEvents } from 'react-leaflet'
 import "leaflet/dist/leaflet.css";
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import "./Map.css";
 
 function AddMarkerToClick() {
-
     const [markers, setMarkers] = useState([]);
-  
+    // const [elevation, setElevation] = useState();
+
+    // const calculateElevation = ()=>{
+
+    // }
+
     const map = useMapEvents({
       click(e) {
         const newMarker = e.latlng;
@@ -21,7 +25,9 @@ function AddMarkerToClick() {
       <>
         {markers.map((marker, idx) => 
           <Marker key={`marker-${idx}`} position={marker}>
-            <Popup>Marker is at {marker}</Popup>
+            <Tooltip permanent>
+                <span>Marker is at</span>
+            </Tooltip>
           </Marker>
         )}
       </>
