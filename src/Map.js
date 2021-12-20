@@ -1,20 +1,34 @@
 import React, {useState} from 'react';
 import L from 'leaflet';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet'
 import "leaflet/dist/leaflet.css";
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import "./Map.css";
 
-function Map(){
-    const [markers, setMarkers] = useState([[51.505, -0.09]])
-    
-    const addMarker = (e) => {
-        markers.pop();
-        markers.push(e.latlng);
-        setMarkers(markers)
-    }
+function AddMarkerToClick() {
 
+    const [markers, setMarkers] = useState([]);
+  
+    const map = useMapEvents({
+      click(e) {
+        const newMarker = e.latlng;
+        setMarkers([newMarker]);
+      },
+    })
+  
+    return (
+      <>
+        {markers.map((marker, idx) => 
+          <Marker key={`marker-${idx}`} position={marker}>
+            <Popup>Marker is at {marker}</Popup>
+          </Marker>
+        )}
+      </>
+    )
+  }
+
+function Map(){
     let DefaultIcon = L.icon({
         iconUrl: icon,
         shadowUrl: iconShadow
@@ -25,19 +39,12 @@ function Map(){
         <div>
            <MapContainer 
                 center={[51.505, -0.09]}       
-                onClick={addMarker}
                 zoom={13} >
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                {markers.map((position, idx) => 
-                    <Marker key={`marker-${idx}`} position={position}>
-                        <Popup>
-                            A pretty CSS3 popup. <br /> Easily customizable.
-                        </Popup>
-                    </Marker>
-                )}
+                 <AddMarkerToClick />
             </MapContainer>
         </div>
     )
