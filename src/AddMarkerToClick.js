@@ -7,7 +7,6 @@ function AddMarkerToClick({changedLatLng, resetLatLng}) {
     const [elevation, setElevation] = useState();
 
     const calculateElevation = (newMarker)=>{
-      console.log('newMarker', newMarker)
       const lat = newMarker.lat ? newMarker.lat : newMarker[0];
       const lng = newMarker.lng ? newMarker.lng : newMarker[1];
         fetch(`https://api.opentopodata.org/v1/test-dataset?locations=${lat},${lng}`)
