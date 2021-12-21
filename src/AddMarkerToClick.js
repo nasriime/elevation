@@ -22,13 +22,6 @@ function AddMarkerToClick({changedLatLng}) {
               }
             )
     }
-    
-    useEffect(() => {
-      if(changedLatLng && changedLatLng[0]){
-        calculateElevation(changedLatLng)
-        setMarkers([changedLatLng]);
-      }
-    }, [changedLatLng])
 
     const map = useMapEvents({
       click(e) {
@@ -37,6 +30,14 @@ function AddMarkerToClick({changedLatLng}) {
         setMarkers([newMarker]);
       },
     })
+
+    useEffect(() => {
+        if(changedLatLng && changedLatLng[0]){
+          calculateElevation(changedLatLng)
+          setMarkers([changedLatLng]);
+          map.panTo(changedLatLng);
+        }
+      }, [changedLatLng])
   
     return (
       <>
