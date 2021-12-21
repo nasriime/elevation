@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import "./UserForm.css";
+import "./UserForm.scss";
 
 function UserForm({newLatLng}) {
    const [lat, setLat] = useState(51.505);
