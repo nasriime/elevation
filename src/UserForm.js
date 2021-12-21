@@ -1,6 +1,14 @@
+import "./UserForm.css";
+
 function UserForm(props) {
     return (
-       <div>user Form</div>
+       <div className="user-form">
+          <label>Langutitde</label>
+          <input type="number" />
+          <label>latitude</label>
+          <input type="number" />
+          <button>Calulate</button>
+       </div>
     );
   }
   

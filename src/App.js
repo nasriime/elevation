@@ -1,9 +1,11 @@
 import Map from './Map';
+import UserForm from './UserForm';
 
 function App() {
   return (
     <div>
-      <Map />
+      <UserForm/>
+      <Map/>
     </div>
   );
 }
