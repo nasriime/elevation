@@ -8,6 +8,10 @@
     
     label{
         margin: 0 10px;
+        @media(max-width:400px){
+            display: inline-block;
+            min-width: 77px;
+        }
     }
 }
 
