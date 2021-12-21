@@ -8,15 +8,25 @@ import "./Map.css";
 
 function AddMarkerToClick() {
     const [markers, setMarkers] = useState([]);
-    // const [elevation, setElevation] = useState();
+    const [elevation, setElevation] = useState();
 
-    // const calculateElevation = ()=>{
-
-    // }
+    const calculateElevation = (newMarker)=>{
+        fetch(`https://api.opentopodata.org/v1/test-dataset?locations=${newMarker.lat},${newMarker.lng}`)
+            .then(res => res.json())
+            .then(
+              (res) => {
+                  setElevation(res.results[0]["elevation"])
+              },
+              (err) => {
+                  console.log('err', err)
+              }
+            )
+    }
 
     const map = useMapEvents({
       click(e) {
         const newMarker = e.latlng;
+        calculateElevation(newMarker)
         setMarkers([newMarker]);
       },
     })
@@ -26,7 +36,7 @@ function AddMarkerToClick() {
         {markers.map((marker, idx) => 
           <Marker key={`marker-${idx}`} position={marker}>
             <Tooltip permanent>
-                <span>Marker is at</span>
+                <span>elevation {elevation}</span>
             </Tooltip>
           </Marker>
         )}
