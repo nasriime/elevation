@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import L from 'leaflet';
 import { MapContainer, TileLayer, Marker, Tooltip, useMapEvents } from 'react-leaflet'
 import "leaflet/dist/leaflet.css";
@@ -6,12 +6,12 @@ import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import "./Map.css";
 
-function AddMarkerToClick() {
+function AddMarkerToClick({changedLatLng}) {
     const [markers, setMarkers] = useState([]);
     const [elevation, setElevation] = useState();
 
     const calculateElevation = (newMarker)=>{
-        fetch(`https://api.opentopodata.org/v1/test-dataset?locations=${newMarker.lat},${newMarker.lng}`)
+        fetch(`https://api.opentopodata.org/v1/test-dataset?locations=${newMarker.lat || newMarker[0]},${newMarker.lng || newMarker[1]}`)
             .then(res => res.json())
             .then(
               (res) => {
@@ -22,6 +22,13 @@ function AddMarkerToClick() {
               }
             )
     }
+    
+    useEffect(() => {
+      if(changedLatLng && changedLatLng[0]){
+        calculateElevation(changedLatLng)
+        setMarkers([changedLatLng]);
+      }
+    }, [changedLatLng])
 
     const map = useMapEvents({
       click(e) {
@@ -44,7 +51,7 @@ function AddMarkerToClick() {
     )
   }
 
-function Map(){
+function Map({changedLatLng}){
     let DefaultIcon = L.icon({
         iconUrl: icon,
         shadowUrl: iconShadow
@@ -60,7 +67,7 @@ function Map(){
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                 <AddMarkerToClick />
+                 <AddMarkerToClick changedLatLng={changedLatLng} />
             </MapContainer>
         </div>
     )
