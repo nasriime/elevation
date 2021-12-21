@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react';
 import L from 'leaflet';
-import { MapContainer, TileLayer, Marker, Tooltip, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer } from 'react-leaflet';
 import AddMarkerToClick from "./AddMarkerToClick";
 import "leaflet/dist/leaflet.css";
 import icon from 'leaflet/dist/images/marker-icon.png';
