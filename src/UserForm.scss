@@ -5,12 +5,22 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    @media(max-width:576px){
+        text-align: left;
+    }
     
     label{
         margin: 0 10px;
-        @media(max-width:400px){
-            display: inline-block;
-            min-width: 77px;
+        @media(max-width:576px){
+            display: block;
+            margin: 5px 0 5px;
+        }
+    }
+
+    input{
+        border-radius: 4px;
+        @media(max-width:576px){
+            width: 100%;
         }
     }
 }
