@@ -7,7 +7,7 @@ import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import "./Map.scss";
 
-function Map({changedLatLng}){
+function Map({changedLatLng, resetLatLng}){
     let DefaultIcon = L.icon({
         iconUrl: icon,
         shadowUrl: iconShadow
@@ -23,7 +23,7 @@ function Map({changedLatLng}){
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                 <AddMarkerToClick changedLatLng={changedLatLng} />
+                 <AddMarkerToClick resetLatLng={resetLatLng} changedLatLng={changedLatLng} />
             </MapContainer>
         </div>
     )
