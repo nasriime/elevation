@@ -7,6 +7,7 @@ function App() {
 
   return (
     <div>
+      <div>Elevation Finder</div>
       <UserForm newLatLng={val=>setChangedLatLng(val)}/>
       <Map changedLatLng={changedLatLng} />
     </div>

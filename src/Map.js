@@ -15,7 +15,11 @@ function AddMarkerToClick({changedLatLng}) {
             .then(res => res.json())
             .then(
               (res) => {
+                if(res.results && res.results[0]){
                   setElevation(res.results[0]["elevation"])
+                }else{
+                  alert('Invalid longtitude or latitiude')
+                }
               },
               (err) => {
                   console.log('err', err)
