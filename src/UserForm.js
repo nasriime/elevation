@@ -12,11 +12,15 @@ function UserForm({newLatLng}) {
 
     return (
       <div className="user-form">
-         <label>latitude</label>
-         <input type="number" value={lat} onChange={e=> setLat(Number(e.target.value))} />
-         <label>Longitude</label>
-         <input type="number" value={lng} onChange={e=> setLng(Number(e.target.value))} />
-         <button onClick={e=>_onSubmit(e)}>Calculate</button>
+         <div>
+            <label><strong>latitude</strong></label>
+            <input type="number" value={lat} onChange={e=> setLat(Number(e.target.value))} />
+            <label><strong>Longitude</strong></label>
+            <input type="number" value={lng} onChange={e=> setLng(Number(e.target.value))} />
+         </div>
+         {/* <div className="btn-wrapper"> */}
+            <button onClick={e=>_onSubmit(e)}>Calculate</button>
+         {/* </div> */}
        </div>
     );
   }
