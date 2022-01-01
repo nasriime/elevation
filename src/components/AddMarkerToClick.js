@@ -1,8 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { Marker, Tooltip, useMapEvents } from 'react-leaflet'
+import {MapContext} from '../context/MapContext'
 
 
-function AddMarkerToClick({changedLatLng, resetLatLng}) {
+function AddMarkerToClick(props) {
+  const { changeLatLng, changedLatLng } = useContext(MapContext);
     const [markers, setMarkers] = useState([]);
     const [elevation, setElevation] = useState();
 
@@ -17,7 +19,7 @@ function AddMarkerToClick({changedLatLng, resetLatLng}) {
                   setElevation(res.results[0]["elevation"])
                 }else{
                   setElevation();
-                  resetLatLng()
+                  changeLatLng([])
                   alert('Invalid longtitude or latitiude')
                 }
               },

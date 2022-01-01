@@ -1,13 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
+import {MapContext} from '../context/MapContext';
 import "./UserForm.scss";
 
-function UserForm({newLatLng}) {
+function UserForm(props) {
+   const { changeLatLng } = useContext(MapContext);
    const [lat, setLat] = useState(51.505);
    const [lng, setLng] = useState(-0.09);
 
    const _onSubmit= (e)=>{
       e.preventDefault();
-      newLatLng([lat, lng])
+      changeLatLng([lat, lng])
    }
 
     return (
